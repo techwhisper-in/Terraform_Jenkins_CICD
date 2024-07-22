@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    
     environment {
         AWS_ACCESS_KEY_ID = ""
         AWS_SECRET_ACCESS_KEY = ""
@@ -11,25 +12,25 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/NeeharikaRN/Terraform_Jenkins_CICD.git'
             }
         }
+        
         stage('INIT') {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                        // Inside this block, AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY are securely set
                         bat 'terraform init'
                     }
                 }
             }
         }
+        
         stage('SANITY CHECK') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                         bat 'terraform validate'
-                    }
                 }
             }
         }
+        
         stage('PLAN') {
             steps {
                 script {
@@ -39,6 +40,7 @@ pipeline {
                 }
             }
         }
+        
         stage('FORMAT') {
             steps {
                 script {
@@ -46,6 +48,7 @@ pipeline {
                 }
             }
         }
+        
         stage('Approval') {
             steps {
                 script {
@@ -53,6 +56,7 @@ pipeline {
                 }
             }
         }
+        
         stage('APPLY') {
             steps {
                 script {
@@ -62,9 +66,14 @@ pipeline {
                 }
             }
         }
+        
         stage('RESOURCES LIST') {
             steps {
-                bat 'terraform state list'
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                        bat 'terraform state list'
+                    }
+                }
             }
         }
     }
