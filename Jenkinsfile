@@ -1,6 +1,9 @@
 pipeline {
     agent any
-    withCredentials([usernamePassword(credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) { 
+    environment {
+        AWS_ACCESS_KEY_ID = ""
+        AWS_SECRET_ACCESS_KEY = ""
+    }
     
     stages {
         stage('Checkout Terraform Project') {
@@ -10,32 +13,53 @@ pipeline {
         }
         stage('INIT') {
             steps {
-                bat 'terraform init'
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                        // Inside this block, AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY are securely set
+                        bat 'terraform init'
+                    }
+                }
             }
         }
         stage('SANITY CHECK') {
             steps {
-                bat 'terraform validate'
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                        bat 'terraform validate'
+                    }
+                }
             }
         }
         stage('PLAN') {
             steps {
-                bat 'terraform plan -out "s3.tfplan"'
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                        bat 'terraform plan -out "s3.tfplan"'
+                    }
+                }
             }
         }
         stage('FORMAT') {
             steps {
-                bat 'terraform fmt'
+                script {
+                    bat 'terraform fmt'
+                }
             }
         }
         stage('Approval') {
             steps {
-                input 'Proceed to apply Terraform changes?'
+                script {
+                    input 'Proceed to apply Terraform changes?'
+                }
             }
         }
         stage('APPLY') {
             steps {
-                bat 'terraform apply "s3.tfplan"'
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                        bat 'terraform apply "s3.tfplan"'
+                    }
+                }
             }
         }
         stage('RESOURCES LIST') {
