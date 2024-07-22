@@ -1,10 +1,6 @@
 pipeline {
     agent any
-    
-    environment {
-        AWS_ACCESS_KEY_ID = credentials('aws-key').username
-        AWS_SECRET_ACCESS_KEY = credentials('aws-key').password
-    }
+    withCredentials([usernamePassword(credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) { 
     
     stages {
         stage('Checkout Terraform Project') {
@@ -47,5 +43,6 @@ pipeline {
                 bat 'terraform state list'
             }
         }
+    }
     }
 }
