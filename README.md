@@ -15,7 +15,7 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://gitlab.com/n.neeharikareddy/terraform-jenkins-pipeline.git
+git remote add origin https://github.com/NeeharikaRN/Terraform_Jenkins_CICD.git
 git branch -M main
 git push -uf origin main
 ```
