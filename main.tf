@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "bucket1" {
-	bucket = "neeha-first-bucket"
+	bucket = "ankit-ex-kumar-s3bucket-7-26-2024"
 }
 
 resource "aws_s3_bucket" "bucket2" {
@@ -12,10 +12,10 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket         = "neeha-s3bucket-date"
+    bucket         = "ankit-ex-kumar-s3bucket-7-26-2024"
     key            = "globalstate/s3/terraform.tfstate"
     region         = "eu-west-1"
-    dynamodb_table = "neeha-date-dblocks"
+    dynamodb_table = "ankit-ex-kumar-7-26-2024-dblocks"
     encrypt        = true
   }
 }
