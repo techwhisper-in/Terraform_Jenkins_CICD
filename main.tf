@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "bucket1" {
-	bucket = "ankit-ex-kumar-s3bucket-7-26-2024"
+	bucket = "ankit-ex-kumar-new-s3bucket-7-26-2024"
 }
 
 resource "aws_s3_bucket" "bucket2" {
