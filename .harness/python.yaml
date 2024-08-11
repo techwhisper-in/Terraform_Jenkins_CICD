@@ -23,11 +23,7 @@ pipeline:
                     source:
                       type: Inline
                       spec:
-                        script: |-
-                          ls -la
-                          cwd
-                          python3
-                          print("Ankit")
+                        script: <+input>
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
