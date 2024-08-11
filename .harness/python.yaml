@@ -23,7 +23,9 @@ pipeline:
                     source:
                       type: Inline
                       spec:
-                        script: python3 print("Hello, Ankit")
+                        script: |-
+                          python3
+                          print("Ankit")
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
