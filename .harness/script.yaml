@@ -1,0 +1,23 @@
+inputSet:
+  pipeline:
+    identifier: python
+    stages:
+      - stage:
+          identifier: bash
+          type: Custom
+          spec:
+            execution:
+              steps:
+                - step:
+                    identifier: ShellScript_1
+                    type: ShellScript
+                    spec:
+                      source:
+                        type: Inline
+                        spec:
+                          script: |
+                            curl -s https://raw.githubusercontent.com/Killercodes/py/main/codebook/hello.py | python3
+  name: script
+  identifier: script
+  orgIdentifier: default
+  projectIdentifier: myfirstproject
