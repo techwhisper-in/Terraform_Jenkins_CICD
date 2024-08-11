@@ -21,9 +21,9 @@ pipeline:
                     shell: Bash
                     executionTarget: {}
                     source:
-                      type: Inline
+                      type: Harness
                       spec:
-                        script: <+input>
+                        file: /hello.py
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
