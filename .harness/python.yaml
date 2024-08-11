@@ -1,0 +1,32 @@
+pipeline:
+  name: python
+  identifier: python
+  projectIdentifier: myfirstproject
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: bash
+        identifier: bash
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: ShellScript
+                  name: ShellScript_1
+                  identifier: ShellScript_1
+                  spec:
+                    shell: Bash
+                    executionTarget: {}
+                    source:
+                      type: Inline
+                      spec:
+                        script: |-
+                          python3
+                          print("Hello, Ankit")
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: 10m
+        tags: {}
