@@ -24,6 +24,7 @@ pipeline:
                       type: Inline
                       spec:
                         script: |-
+                          ls -la
                           python3
                           print("Ankit")
                     environmentVariables: []
