@@ -25,6 +25,7 @@ pipeline:
                       spec:
                         script: |-
                           ls -la
+                          cwd
                           python3
                           print("Ankit")
                     environmentVariables: []
