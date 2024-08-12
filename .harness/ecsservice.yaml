@@ -32,11 +32,11 @@ pipeline:
                   identifier: GitClone_1
                   spec:
                     connectorRef: connect_to_techwhisperin
-                    repoName: <+input>
+                    repoName: docker-image
                     build:
                       type: branch
                       spec:
-                        branch: <+input>
+                        branch: main
               - step:
                   type: BuildAndPushDockerRegistry
                   name: BuildAndPushDockerRegistry_1
