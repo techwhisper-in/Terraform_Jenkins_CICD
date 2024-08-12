@@ -8,8 +8,9 @@ pipeline:
     ci:
       codebase:
         connectorRef: connect_to_techwhisperin
-        repoName: <+input>
+        repoName: docker-image
         build: <+input>
+        sparseCheckout: []
   stages:
     - stage:
         name: Build Docker
