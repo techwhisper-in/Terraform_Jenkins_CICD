@@ -1,0 +1,48 @@
+pipeline:
+  name: ecs-service
+  identifier: ecsservice
+  projectIdentifier: myfirstproject
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: connect_to_techwhisperin
+        repoName: <+input>
+        build: <+input>
+  stages:
+    - stage:
+        name: Build Docker
+        identifier: DockerBuild
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: GitClone
+                  name: GitClone_1
+                  identifier: GitClone_1
+                  spec:
+                    connectorRef: connect_to_techwhisperin
+                    repoName: <+input>
+                    build:
+                      type: branch
+                      spec:
+                        branch: <+input>
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: account.harnessImage
+                    repo: ankit-public
+                    tags:
+                      - harness-python-delegate-1
