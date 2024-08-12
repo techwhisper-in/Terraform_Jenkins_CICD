@@ -33,7 +33,7 @@ pipeline:
                   identifier: GitClone_1
                   spec:
                     connectorRef: connect_to_techwhisperin
-                    repoName: docker-image
+                    cloneDirectory: /Dockerfile
                     build:
                       type: branch
                       spec:
