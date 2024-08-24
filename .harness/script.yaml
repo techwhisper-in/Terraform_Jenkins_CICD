@@ -31,3 +31,4 @@ inputSet:
                             aws configure set default.region $DEFAULT_REGION
                             aws configure set default.output json
                             aws s3 ls
+                            rm ~/.aws/credentials
