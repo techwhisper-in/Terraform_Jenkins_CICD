@@ -1,4 +1,9 @@
 inputSet:
+  name: script
+  tags: {}
+  identifier: script
+  orgIdentifier: default
+  projectIdentifier: myfirstproject
   pipeline:
     identifier: python
     stages:
@@ -15,9 +20,6 @@ inputSet:
                       source:
                         type: Inline
                         spec:
-                          script: |
-                            curl -s https://raw.githubusercontent.com/Killercodes/py/main/codebook/hello.py | python3
-  name: script
-  identifier: script
-  orgIdentifier: default
-  projectIdentifier: myfirstproject
+                          script: |-
+                            test=<+secrets.getValue("aws-secret-key")>
+                            echo $test
