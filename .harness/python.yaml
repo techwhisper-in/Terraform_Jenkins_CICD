@@ -11,7 +11,7 @@ pipeline:
         description: ""
         type: Custom
         spec:
-          connectorRef: <+input>
+          connectorRef: connect_to_techwhisperin
           execution:
             steps:
               - step:
