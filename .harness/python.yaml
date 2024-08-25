@@ -11,6 +11,7 @@ pipeline:
         description: ""
         type: Custom
         spec:
+          connectorRef: <+input>
           execution:
             steps:
               - step:
