@@ -35,9 +35,10 @@ pipeline:
                     source:
                       type: Inline
                       spec:
-                        script: |
-                          access=<+pipeline.stages.bash.variables.access-key-id>
-                          connector=<+pipeline.stages.bash.spec.execution.steps.ShellScript_1.spec.executionTarget.connectorRef>
+                        script: |-
+                          pwd
+                          access=<+stage.variables.access-key-id>
+                          connector="jklkn"
                           echo $access
                           echo $connector
                     environmentVariables: []
