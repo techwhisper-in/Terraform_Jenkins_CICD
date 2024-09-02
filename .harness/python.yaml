@@ -10,19 +10,7 @@ pipeline:
         identifier: bash
         description: ""
         type: Custom
-        variables:
-          - name: access-key-id
-            type: Secret
-            required: true
-            description: AWS access-key Id
-            value: <+input>
         spec:
-          providerCredential:
-            type: Aws
-            spec:
-              connectorRef: connectawsaccount
-              region: ap-south-1
-              roleArn: ""
           execution:
             steps:
               - step:
@@ -37,10 +25,7 @@ pipeline:
                       spec:
                         script: |-
                           pwd
-                          access=<+pipeline.stages.bash.variables.access-key-id>
-                          connector=<+pipeline.stages.bash.spec.execution.steps.ShellScript_1.spec.executionTarget.connectorRef>
-                          echo $access
-                          echo $connector
+                          aws s3 ls
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
